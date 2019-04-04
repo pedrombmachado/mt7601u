@@ -39,6 +39,13 @@
 #define MT_RX_ORDER			3
 #define MT_RX_URB_SIZE			(PAGE_SIZE << MT_RX_ORDER)
 
+#define RX_FLAG_SHORTPRE (1<<8 )
+#define RX_FLAG_HT_GF (1<<13)
+#define RX_FLAG_HT (1<<9 )
+#define RX_FLAG_SHORT_GI (1<<11)
+#define RX_FLAG_40MHZ (1<<10)
+#define RX_FLAG_STBC_SHIFT (26)
+
 struct mt7601u_dma_buf {
 	struct urb *urb;
 	void *buf;
