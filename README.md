@@ -1,5 +1,8 @@
 This is a Linux driver for MediaTek MT7601U USB dongle. It was written from scratch based on the vendor GPL-driver. Unlike the vendor driver this driver uses modern Linux WiFi infrastructure and should work flawlessly with NetworkManager, wicd, wpa_supplicant and such. This driver was merged into mainline and is part of official Linux kernel since version v4.2. If you are using Linux 4.2 or later there is no need to install this driver.
 
+###
+Tested on Ubuntu 18.04 LTS.
+
 ### Building and using
 To use this driver you need to upgrade your kernel to at least **Linux 3.19**. You also have to grab a copy of the firmware from the vendor driver. Download the vendor driver (see section below) and copy file *MT7601U.bin* to */lib/firmware*:
 
@@ -9,14 +12,15 @@ To use this driver you need to upgrade your kernel to at least **Linux 3.19**. Y
 ```
 Note that name of the file in */lib/firmware* is in lowercase.
 
-After that **make sure you have installed all packages required by your distro to build kernel modules** (```apt-get install linux-headers-$(uname -r)``` or ```yum install kernel-devel``` etc). Build the driver and load it:
+After that **make sure you have installed all packages required by your distro to build kernel modules** (```sudo apt install linux-headers-$(uname -r)```). Build the driver and load it:
 
 ```sh
 $ git clone https://github.com/kuba-moo/mt7601u.git
 $ cd mt7601u
 $ make
-# modprobe mac80211
-# insmod ./mt7601u.ko
+$ sudo rmmod mt7601u.ko
+$ sudo modprobe mac80211
+$ sudo insmod ./mt7601u.ko
 ```
 
 Now when you connect your device a new network interface should be created. Something like this should appear in your kernel logs:
