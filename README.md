@@ -6,15 +6,14 @@ Tested on Ubuntu 18.04 LTS.
 ### Building and using
 To use this driver you need to upgrade your kernel to at least **Linux 3.19**. You also have to grab a copy of the firmware from the vendor driver. Download the vendor driver (see section below) and copy file *MT7601U.bin* to */lib/firmware*:
 
-```sh
-# cd where-you-put-the-vendor-driver
-# cp src/mcu/bin/MT7601.bin /lib/firmware/mt7601u.bin
+```
+$ sudo cp MT7601.bin /lib/firmware/mt7601u.bin
 ```
 Note that name of the file in */lib/firmware* is in lowercase.
 
-After that **make sure you have installed all packages required by your distro to build kernel modules** (```sudo apt install linux-headers-$(uname -r)```). Build the driver and load it:
-
-```sh
+After that **make sure you have installed all packages required by your distro to build kernel modules**
+```
+$ sudo apt install linux-headers-$(uname -r)
 $ git clone https://github.com/kuba-moo/mt7601u.git
 $ cd mt7601u
 $ make
@@ -43,15 +42,8 @@ $ make && sudo make install && depmod
 ```
 However, please remember that this installs the driver *only for your current kernel* and you will have to redo this every time your kernel is updated!
 
-### Supported hardware
-The driver was tested for devices with USB ID of 148f:7601. Specifically I tested it with:
- * TP-LINK TL-WN727N v4;
- * Xiaomi Mini USB;
- * the no-name black&red device from ebay with small detachable antenna.
+### Run the driver
+```
+$ sudo instModule.sh
+```
 
-Also tested with USB ID of 148f:760b wich has MT7601UM chip and works fine with this driver.
-
-But in principle it *should* work with any device supported by the vendor driver.
-
-### Vendor driver
-The original vendor driver can be downloaded from MediaTek's website (http://www.mediatek.com/en/downloads1/downloads/mt7601u-usb/). However, version 3.0.0.4 is broken on recent kernels so you may want to grab one of the improved versions which people put up on GH (like this one: https://github.com/porjo/mt7601u).
