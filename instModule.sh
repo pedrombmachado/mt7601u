@@ -1,4 +1,4 @@
 #! /bin/bash
-echo "Ubuntu2015" | sudo -S modprobe mac80211
-sudo insmod ./mt7601u.ko
+modprobe mac80211
+insmod /home/pedro/repositories/mt7601u/mt7601u.ko
 
